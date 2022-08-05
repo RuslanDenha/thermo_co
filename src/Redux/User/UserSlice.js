@@ -13,7 +13,7 @@ export const login = createAsyncThunk(
             data.append('password', password)
             const response = await postRequest('auth/login', data)
 
-            localStorage.setItem("token", response.data.access_token)
+            localStorage.setItem("access_token", response.data.access_token)
             return { username }
 
         } catch (e) {
