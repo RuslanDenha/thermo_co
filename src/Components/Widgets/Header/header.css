@@ -1,0 +1,17 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #282c34;
+}
+
+.userName {
+    width: 100px;
+    border-bottom: 1px solid #27AE60;
+    font-weight: bold;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+    text-decoration: none;
+}
