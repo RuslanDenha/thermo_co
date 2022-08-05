@@ -1,50 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import Input from 'Components/Widgets/Input/Input';
 import Button from 'Components/Widgets/Button/Button';
 import ErrorLine from 'Components/Widgets/ErrorLine/ErrorLine';
-import axios from "axios";
+import { login, userSelector } from 'Redux/User/UserSlice'
+
 import './LogIn.css'
 
-const logInSuccess = 'logInSuccess'
-const logInFail = 'logInFail'
-
 const LogIn = () => {
-    const [username, setUsername] = useState('tesp')
-    const [password, setPassword] = useState('1234')
-    const [logInResult, setLogInResult] = useState()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const onLogin = async () => {
-        try {
-            const data = new FormData()
-            data.append('username', username)
-            data.append('password', password)
+    const { isSuccess, isError, errorMessage } = useSelector(userSelector);
 
-            await axios.post('http://127.0.0.1:8000/auth/login', data)
+    useEffect(() => {
+        if (isSuccess) navigate("/")
+    }, [isSuccess])
 
-            setLogInResult(logInSuccess)
-        } catch (e) {
-            setLogInResult(logInFail)
-        }
-    }
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-    if (logInResult === logInSuccess) {
-        return (
-            <div className='wrapper' >
-                <div className='formContent'>
-                    We Logged you in!
-                </div>
-            </div>
-        )
-    }
+    const onLogin = () => {
+        dispatch(login({ username, password }));
+    };
 
     return (
         <div className='wrapper' >
             <div className='formContent'>
-                <Input type="text" value={username} onChange={setUsername}/>
-                <Input type="password" value={password} onChange={setPassword}/>
+                <h2 className='formHeader'>LOG IN</h2>
+                <Input
+                    type="text"
+                    value={username}
+                    onChange={setUsername}
+                    placeholder='Username'
+                />
+                <Input
+                    type="password"
+                    value={password}
+                    onChange={setPassword}
+                    placeholder='Password'
+                />
 
-                <ErrorLine isActive={logInResult === logInFail} >
-                    We failed to log you in
+                <ErrorLine isActive={isError} >
+                    {errorMessage}
                 </ErrorLine>
 
                 <Button onClick={onLogin}>

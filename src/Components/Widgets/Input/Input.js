@@ -1,6 +1,6 @@
 import './input.css'
 
-const Input = ({ type, value, onChange }) => {
+const Input = ({ type, value, onChange, placeholder }) => {
     
     const handleOnChange = e => onChange(e.target.value)
 
@@ -9,6 +9,7 @@ const Input = ({ type, value, onChange }) => {
             type={type}
             value={value}
             onChange={handleOnChange}
+            placeholder={placeholder}
         />
     )
 }
