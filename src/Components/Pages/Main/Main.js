@@ -6,20 +6,22 @@ const Main = () => {
     const [sensors, setSensors] = useState([])
 
     useEffect(() => {
-        (async () => {
-            const res = await  getRequest('api/v1/sensors/')
-            setSensors(res.data)
+         (async () => {
+            try {
+                const res = await  getRequest('api/v1/sensors/')
+                setSensors(res.data)
+            } catch (e) {
+                // error handling
+            }
         })()
     }, [])
 
-    if (sensors.length <= 0) {
+    if (sensors.length === 0) {
         return null
     }
 
     return (
-        <div>
-            <Table rows={sensors} />
-        </div>
+        <Table rows={sensors} />
     )
 }
 

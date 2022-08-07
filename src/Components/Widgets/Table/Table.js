@@ -1,26 +1,25 @@
-import './table.css'
+import TableHeader from "./TableHeader";
+import css from './table.module.css'
+import { useMemo } from "react";
 
 const Table = ({ rows }) => {
-    const columns = Object.keys(rows[0]);
+    const columns = useMemo(() =>  Object.keys(rows[0]), []);
 
     return (
-        <div className="wrapper">
+        <div className={css.wrapper}>
+            <table className={css.table}>
+                <TableHeader columns={columns} />
 
-            <table className="table table-hover table-mc-light-blue">
-                <thead>
-                <tr>
-                    {columns.map(column => <th key={column}>{column}</th>)}
-                </tr>
-                </thead>
                 <tbody>
-
-                {rows.map(row => (
-                    <tr key={row.id}>
-                        {columns.map(column => <td key={`${row.id}${column}`}>
-                            {String(row[column])}
-                        </td>)}
-                    </tr>
-                ))}
+                    {rows.map(row => (
+                        <tr key={row.id}>
+                            {columns.map(column => (
+                                <td key={`${row.id}${column}`}>
+                                    {String(row[column])}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

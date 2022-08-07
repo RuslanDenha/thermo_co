@@ -2,12 +2,12 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #282c34;
+    border-bottom: 1px solid var(--dark-color);
 }
 
 .userName {
     width: 100px;
-    border-bottom: 1px solid #27AE60;
+    border-bottom: 1px solid var(--main-color);
     font-weight: bold;
     border-radius: 1px;
     cursor: pointer;

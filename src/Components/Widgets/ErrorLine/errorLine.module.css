@@ -1,6 +1,6 @@
 .errorLine {
     border-radius: 5px;
-    background: #e56e6e;
+    background: var(--error-color);
     width: calc(100% - 30px);
     max-width: 420px;
     text-align: center;

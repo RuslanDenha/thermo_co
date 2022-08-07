@@ -1,4 +1,4 @@
-import './button.css'
+import css from './button.module.css'
 import { NavLink } from "react-router-dom";
 
 const Button = ({ children, onClick, to }) => {
@@ -7,7 +7,7 @@ const Button = ({ children, onClick, to }) => {
         return (
             <NavLink
                 to={to}
-                className='button'
+                className={css.button}
             >
                 {children}
             </NavLink>
@@ -17,7 +17,7 @@ const Button = ({ children, onClick, to }) => {
     return (
         <button
             onClick={onClick}
-            className='button'
+            className={css.button}
         >
             {children}
         </button>

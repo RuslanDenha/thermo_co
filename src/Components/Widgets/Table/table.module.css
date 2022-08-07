@@ -1,0 +1,40 @@
+.wrapper {
+    box-shadow: 0 1px 3px 0 var(--dark-color), 0 1px 2px 0 var(--dark-color);
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    background-color: var(--white-color);
+    border-collapse: collapse
+}
+
+.table > tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--dark-color);
+}
+
+.table > thead {
+    color: var(--white-color);
+    background-color: var(--main-color);
+}
+
+.table > thead > tr {
+    font-weight: 400;
+    text-transform: capitalize;
+    border-bottom: 1px solid var(--dark-color);
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+    text-align: left;
+    padding: 1.6rem;
+    vertical-align: top;
+    transition: all 0.3s ease;
+    border: 1px solid var(--dark-color);
+}
+
+.table > tbody > tr:hover > td,
+.table > tbody > tr:hover > th {
+    background-color: var(--gray-color);
+}

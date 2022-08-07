@@ -6,8 +6,7 @@ import Input from 'Components/Widgets/Input/Input';
 import Button from 'Components/Widgets/Button/Button';
 import ErrorLine from 'Components/Widgets/ErrorLine/ErrorLine';
 import { login, userSelector } from 'Redux/User/UserSlice'
-
-import './LogIn.css'
+import css from './logIn.module.css'
 
 const LogIn = () => {
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ const LogIn = () => {
 
     useEffect(() => {
         if (isSuccess) navigate("/")
-    }, [isSuccess])
+    }, [isSuccess, navigate])
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -27,9 +26,9 @@ const LogIn = () => {
     };
 
     return (
-        <div className='wrapper' >
-            <div className='formContent'>
-                <h2 className='formHeader'>LOG IN</h2>
+        <div className={css.wrapper} >
+            <div className={css.formContent}>
+                <h2 className={css.formHeader}>LOG IN</h2>
                 <Input
                     type="text"
                     value={username}

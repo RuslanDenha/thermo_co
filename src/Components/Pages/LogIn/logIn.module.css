@@ -11,22 +11,21 @@
 .formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    background: var(--white-color);
     width: 90%;
     max-width: 450px;
     position: relative;
     padding: 0;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 var(--dark-color);
     text-align: center;
 }
 
 .formHeader {
-    background: #27AE60;
+    background: var(--main-color);
     padding: 20px;
     font-size: 1.4em;
     font-weight: normal;
     text-align: center;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--white-color);
 }

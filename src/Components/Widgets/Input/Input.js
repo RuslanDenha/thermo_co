@@ -1,4 +1,4 @@
-import './input.css'
+import css from './input.module.css'
 
 const Input = ({ type, value, onChange, placeholder }) => {
     
@@ -7,6 +7,7 @@ const Input = ({ type, value, onChange, placeholder }) => {
     return (
         <input
             type={type}
+            className={css.baseInput}
             value={value}
             onChange={handleOnChange}
             placeholder={placeholder}

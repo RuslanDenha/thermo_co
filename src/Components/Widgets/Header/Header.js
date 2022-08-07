@@ -1,6 +1,6 @@
 import Button from "Components/Widgets/Button/Button";
 
-import './header.css'
+import css from './header.module.css'
 import {useSelector} from "react-redux";
 import {userSelector} from "../../../Redux/User/UserSlice";
 import {useMemo} from "react";
@@ -11,7 +11,7 @@ const Header = () => {
     const logInArea = useMemo(() => {
         if (username) {
             return (
-                <div className='userName'>
+                <div className={css.userName}>
                     User: {username}
                 </div>
             )
