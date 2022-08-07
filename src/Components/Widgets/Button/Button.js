@@ -1,7 +1,7 @@
-import css from './button.module.css'
 import { NavLink } from "react-router-dom";
+import css from './button.module.css'
 
-const Button = ({ children, onClick, to }) => {
+const Button = ({ children, onClick, to, disabled }) => {
 
     if (to) {
         return (
@@ -18,6 +18,7 @@ const Button = ({ children, onClick, to }) => {
         <button
             onClick={onClick}
             className={css.button}
+            disabled={disabled}
         >
             {children}
         </button>

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { postRequest } from 'helper'
+import { postRequest, routes } from 'api'
 
 export const login = createAsyncThunk(
     "user/login",
@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
             const data = new FormData()
             data.append('username', username)
             data.append('password', password)
-            const response = await postRequest('auth/login', data)
+            const response = await postRequest(routes.login, data)
 
             localStorage.setItem("access_token", response.data.access_token)
             return { username }

@@ -1,6 +1,6 @@
 import css from './input.module.css'
 
-const Input = ({ type, value, onChange, placeholder }) => {
+const Input = ({ type = 'text', value, onChange, placeholder }) => {
     
     const handleOnChange = e => onChange(e.target.value)
 

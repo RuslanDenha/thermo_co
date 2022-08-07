@@ -27,7 +27,7 @@ const Header = () => {
 
     return (
         <nav>
-            <div>
+            <div className={css.navigationLine}>
                 <Button to='/'>
                     Main
                 </Button>

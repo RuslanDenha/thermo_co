@@ -12,6 +12,10 @@
     text-align: center;
 }
 
-.button:hover{
+.button:hover {
      background: var(--main-color-darker);
+ }
+
+.button:disabled {
+     background: var(--gray-color);
  }
