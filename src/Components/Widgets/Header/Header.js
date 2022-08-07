@@ -27,9 +27,15 @@ const Header = () => {
 
     return (
         <nav>
-            <Button to='/'>
-                Main
-            </Button>
+            <div>
+                <Button to='/'>
+                    Main
+                </Button>
+                <Button to='/sensors'>
+                    Sensors
+                </Button>
+            </div>
+
             {logInArea}
         </nav>
     )

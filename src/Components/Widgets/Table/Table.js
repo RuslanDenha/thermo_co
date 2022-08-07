@@ -3,7 +3,7 @@ import css from './table.module.css'
 import { useMemo } from "react";
 
 const Table = ({ rows }) => {
-    const columns = useMemo(() =>  Object.keys(rows[0]), []);
+    const columns = useMemo(() =>  Object.keys(rows[0]), []); // eslint-disable-line
 
     return (
         <div className={css.wrapper}>
