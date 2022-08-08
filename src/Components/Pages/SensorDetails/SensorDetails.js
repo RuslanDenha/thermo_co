@@ -15,6 +15,7 @@ const SensorDetails = () => {
     const [description, setDescriptions] = useState('');
     const [samplingPeriod, setSamplingPeriod] = useState(5);
     const [isActive, setIsActive] = useState(false);
+    const [initialErrorMessage, setInitialErrorMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -26,7 +27,7 @@ const SensorDetails = () => {
                 setSamplingPeriod(res.data.samplingPeriod)
                 setIsActive(res.data.isActive)
             } catch (e) {
-                setErrorMessage(e.response.data.detail)
+                setInitialErrorMessage(e.response.data.detail)
             }
         })()
     }, []) // eslint-disable-line
@@ -64,6 +65,17 @@ const SensorDetails = () => {
     const isSubmitDisabled = useMemo(() => (
         description.length < 5 || samplingPeriod < 5
     ), [description.length, samplingPeriod])
+
+    // in case when page can not load initial state
+    if (initialErrorMessage) {
+        return  (
+            <div className={css.errorWrapper}>
+                <ErrorLine isActive >
+                    {initialErrorMessage}
+                </ErrorLine>
+            </div>
+        )
+    }
 
     return (
         <div className={css.wrapper} >
