@@ -1,16 +1,15 @@
-import { useEffect, useState, useCallback, useMemo } from "react";
-import { useNavigate, useParams } from 'react-router-dom'
-import { getRequest, patchRequest, deleteRequest, routes } from "api";
+import { useEffect, useState, useCallback } from "react";
+import { useParams } from 'react-router-dom'
+import { getRequest, routes } from "api";
 import Input from "Components/Widgets/Input/Input";
 import ErrorLine from "Components/Widgets/ErrorLine/ErrorLine";
-import Button from "Components/Widgets/Button/Button";
 import Switch from "Components/Widgets/Switch/Switch";
 
 import css from "./sensorDetails.js.module.css";
+import SensorDetailsControls from "./SensorDetailsControls";
 
 const SensorDetails = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [description, setDescriptions] = useState('');
     const [samplingPeriod, setSamplingPeriod] = useState(5);
@@ -35,36 +34,6 @@ const SensorDetails = () => {
     const onIsActiveSwitch = useCallback(() => {
         setIsActive(isActive => !isActive)
     }, []) // eslint-disable-line
-
-    const onUpdateSensor = useCallback(async () => {
-        try {
-            const data = {
-                description,
-                samplingPeriod,
-                isActive
-            }
-            const res = await patchRequest(`${routes.sensorsList}/${id}`, data)
-
-            setDescriptions(res.data.description)
-            setSamplingPeriod(res.data.samplingPeriod)
-            setIsActive(res.data.isActive)
-        } catch (e) {
-            setErrorMessage(e.response.data.detail)
-        }
-    }, [description, samplingPeriod, isActive]) // eslint-disable-line
-
-    const onDeleteSensor = useCallback(async () => {
-        try {
-            await deleteRequest(`${routes.sensorsList}/${id}`)
-            navigate('/sensors')
-        } catch (e) {
-            setErrorMessage(e.response.data.detail)
-        }
-    }, []) // eslint-disable-line
-
-    const isSubmitDisabled = useMemo(() => (
-        description.length < 5 || samplingPeriod < 5
-    ), [description.length, samplingPeriod])
 
     // in case when page can not load initial state
     if (initialErrorMessage) {
@@ -107,19 +76,16 @@ const SensorDetails = () => {
                     {errorMessage}
                 </ErrorLine>
 
-                <Button
-                    onClick={onUpdateSensor}
-                    disabled={isSubmitDisabled}
-                >
-                    Update
-                </Button>
-
-                <Button
-                    className='danger'
-                    onClick={onDeleteSensor}
-                >
-                    Delete
-                </Button>
+                <SensorDetailsControls
+                    id={id}
+                    description={description}
+                    samplingPeriod={samplingPeriod}
+                    isActive={isActive}
+                    setDescriptions={setDescriptions}
+                    setSamplingPeriod={setSamplingPeriod}
+                    setIsActive={setIsActive}
+                    setErrorMessage={setErrorMessage}
+                />
             </div>
         </div>
     )
