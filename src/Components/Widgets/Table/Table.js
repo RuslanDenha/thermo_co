@@ -13,6 +13,10 @@ const getCell = (row, column) => {
         )
     }
 
+    if (cellData === true) return 'Yes'
+
+    if (cellData === false) return 'No'
+
     return (
         String(cellData)
     )
