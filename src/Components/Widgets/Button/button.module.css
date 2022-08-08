@@ -13,8 +13,16 @@
 }
 
 .button:hover {
-     background: var(--main-color-darker);
- }
+    background: var(--main-color-darker);
+}
+
+.danger {
+    background-color: var(--error-color);;
+}
+
+.danger:hover {
+    background-color: var(--error-color-darker);;
+}
 
 .button:disabled {
      background: var(--gray-color);

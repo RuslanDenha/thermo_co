@@ -1,9 +1,26 @@
 import { useMemo } from "react";
 import TableHeader from "./TableHeader";
 import css from './table.module.css'
+import Button from "../Button/Button";
+
+const getCell = (row, column) => {
+    const cellData = row[column];
+
+    if (cellData.type === 'button') {
+        const { onClick, text } = cellData
+        return (
+            <Button onClick={onClick}>{text}</Button>
+        )
+    }
+
+    return (
+        String(cellData)
+    )
+}
 
 const Table = ({ rows }) => {
     const columns = useMemo(() =>  Object.keys(rows[0]), []); // eslint-disable-line
+
 
     return (
         <div className={css.wrapper}>
@@ -15,7 +32,7 @@ const Table = ({ rows }) => {
                         <tr key={row.id}>
                             {columns.map(column => (
                                 <td key={`${row.id}${column}`}>
-                                    {String(row[column])}
+                                    {getCell(row, column)}
                                 </td>
                             ))}
                         </tr>

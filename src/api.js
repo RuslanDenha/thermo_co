@@ -22,6 +22,6 @@ export const getRequest = (url) => axios.get(`${baseUrl}${url}`, getConfig())
 
 export const putRequest = (url, data) => axios.put(`${baseUrl}${url}`, data)
 
-export const patchRequest = (url, data) => axios.patch(`${baseUrl}${url}`, data)
+export const patchRequest = (url, data) => axios.patch(`${baseUrl}${url}`, data, getConfig())
 
-export const deleteRequest = (url, data) => axios.delete(`${baseUrl}${url}`, data)
+export const deleteRequest = (url) => axios.delete(`${baseUrl}${url}`, getConfig())

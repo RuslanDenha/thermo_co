@@ -5,7 +5,7 @@ import Button from "Components/Widgets/Button/Button";
 import {postRequest, routes} from "api"
 import css from './sensorsList.module.css';
 
-const SensorListNewSensor = ({ maxSensorId, setErrorMessage, loadSensors }) => {
+const SensorsListNewSensor = ({ maxSensorId, setErrorMessage, loadSensors }) => {
     const [description, setDescriptions] = useState('');
     const [samplingPeriod, setSamplingPeriod] = useState(5);
     const [isActive, setIsActive] = useState(false);
@@ -74,4 +74,4 @@ const SensorListNewSensor = ({ maxSensorId, setErrorMessage, loadSensors }) => {
     )
 }
 
-export default SensorListNewSensor;
+export default SensorsListNewSensor;

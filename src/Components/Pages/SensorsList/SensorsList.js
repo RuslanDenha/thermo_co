@@ -2,21 +2,34 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import { getRequest, routes } from "api";
 import Table from 'Components/Widgets/Table/Table'
 import ErrorLine from 'Components/Widgets/ErrorLine/ErrorLine';
-import SensorListNewSensor from "./SensorListNewSensor";
+import SensorsListNewSensor from "./SensorsListNewSensor";
 import css from './sensorsList.module.css'
+import {useNavigate} from "react-router-dom";
 
 const SensorsList = () => {
+    const navigate = useNavigate();
+
     const [sensors, setSensors] = useState([])
     const [errorMessage, setErrorMessage] = useState('')
 
     const loadSensors = useCallback(async () => {
         try {
             const res = await  getRequest(routes.sensorsList)
-            setSensors(res.data)
+            const formatted = res.data.map((item) => ({
+                ...item,
+                details: {
+                    type: 'button',
+                    text: 'details',
+                    onClick: () => {
+                        navigate(`/sensors/${item.id}`)
+                    }
+                }
+            }))
+            setSensors(formatted)
         } catch (e) {
             setErrorMessage(e.response.data.detail)
         }
-    }, [setSensors, setErrorMessage])
+    }, []) // eslint-disable-line
 
     useEffect(() => {
         loadSensors()
@@ -39,12 +52,14 @@ const SensorsList = () => {
 
     return (
         <>
-            <SensorListNewSensor
+            <SensorsListNewSensor
                 maxSensorId={maxSensorId}
                 setErrorMessage={setErrorMessage}
                 loadSensors={loadSensors}
             />
-            <Table rows={sensors} />
+            <Table
+                rows={sensors}
+            />
         </>
     )
 }
