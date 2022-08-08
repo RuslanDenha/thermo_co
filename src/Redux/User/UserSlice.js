@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { postRequest, routes } from 'api'
+import { getRequest, postRequest, routes } from 'api'
 
 export const login = createAsyncThunk(
     "user/login",
@@ -14,6 +14,21 @@ export const login = createAsyncThunk(
             const response = await postRequest(routes.login, data)
 
             localStorage.setItem("access_token", response.data.access_token)
+            return { username }
+
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data.detail)
+        }
+    }
+)
+
+export const getAuthenticatedUser = createAsyncThunk(
+    "user/getAuthenticatedUser",
+    async (_, thunkAPI) => {
+        try {
+            const response = await getRequest(routes.authCheck)
+            const { username } = response.data
+
             return { username }
 
         } catch (e) {
@@ -42,6 +57,12 @@ export const userSlice = createSlice({
             state.isSuccess = false;
             state.isError = true;
             state.errorMessage = action.payload;
+        },
+        [getAuthenticatedUser.fulfilled]: (state, action) => {
+            state.username = action.payload.username;
+        },
+        [getAuthenticatedUser.rejected]: (state) => {
+            state.username = null;
         }
     }
 })

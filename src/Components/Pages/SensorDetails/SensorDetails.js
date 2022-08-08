@@ -20,7 +20,7 @@ const SensorDetails = () => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await getRequest(`${routes.sensorsList}${id}`)
+                const res = await getRequest(`${routes.sensorsList}/${id}`)
 
                 setDescriptions(res.data.description)
                 setSamplingPeriod(res.data.samplingPeriod)
@@ -42,7 +42,7 @@ const SensorDetails = () => {
                 samplingPeriod,
                 isActive
             }
-            const res = await patchRequest(`${routes.sensorsList}${id}`, data)
+            const res = await patchRequest(`${routes.sensorsList}/${id}`, data)
 
             setDescriptions(res.data.description)
             setSamplingPeriod(res.data.samplingPeriod)
@@ -54,7 +54,7 @@ const SensorDetails = () => {
 
     const onDeleteSensor = useCallback(async () => {
         try {
-            await deleteRequest(`${routes.sensorsList}${id}`)
+            await deleteRequest(`${routes.sensorsList}/${id}`)
             navigate('/sensors')
         } catch (e) {
             setErrorMessage(e.response.data.detail)

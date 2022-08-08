@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
     Routes,
     Route,
@@ -7,19 +9,26 @@ import Main from "Components/Pages/Main/Main";
 import SensorsList from "Components/Pages/SensorsList/SensorsList";
 import SensorDetails from "./Components/Pages/SensorDetails/SensorDetails";
 import Header from "Components/Widgets/Header/Header";
+import { getAuthenticatedUser } from "Redux/User/UserSlice";
 
 function App() {
-  return (
-    <div>
-        <Header />
-        <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/sensors" element={<SensorsList />} />
-            <Route path="/sensors/:id" element={<SensorDetails />} />
-            <Route path="/login" element={<LogIn />} />
-        </Routes>
-    </div>
-  );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAuthenticatedUser());
+    }, []) //eslint-disable-line
+
+    return (
+        <div>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/sensors" element={<SensorsList />} />
+                <Route path="/sensors/:id" element={<SensorDetails />} />
+                <Route path="/login" element={<LogIn />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

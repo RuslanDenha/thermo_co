@@ -4,7 +4,8 @@ const baseUrl = 'http://127.0.0.1:8000/'
 
 export const routes = {
     login: 'auth/login',
-    sensorsList: 'api/v1/sensors/',
+    authCheck: 'auth/me',
+    sensorsList: 'api/v1/sensors',
 }
 
 const getConfig = () => {
