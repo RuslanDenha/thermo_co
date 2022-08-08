@@ -6,6 +6,7 @@ export const routes = {
     login: 'auth/login',
     authCheck: 'auth/me',
     sensorsList: 'api/v1/sensors',
+    health : 'health',
 }
 
 const getConfig = () => {

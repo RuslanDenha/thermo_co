@@ -47,7 +47,6 @@ const SensorsList = () => {
                 </ErrorLine>
             </div>
         )
-
     }
 
     return (
@@ -58,6 +57,7 @@ const SensorsList = () => {
                 loadSensors={loadSensors}
             />
             <Table
+                header='Available Sensors'
                 rows={sensors}
             />
         </>

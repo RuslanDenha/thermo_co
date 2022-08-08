@@ -18,38 +18,43 @@ const getCell = (row, column) => {
     )
 }
 
-const Table = ({ rows }) => {
+const Table = ({ rows, header }) => {
     const columns = useMemo(() =>  Object.keys(rows[0]), []); // eslint-disable-line
 
 
     return (
-        <div className={css.wrapper}>
+        <>
+            {header && <h3 className={css.header}>{header}</h3>}
             <table className={css.table}>
                 <TableHeader columns={columns} />
 
                 <tbody>
-                    {rows.map(row => (
-                        <tr key={row.id}>
-                            {columns.map(column => (
-                                <td key={`${row.id}${column}`}>
-                                    {getCell(row, column)}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
+                    {rows.map(row => {
+                        const rowId = row.id || row.pid
+
+                        return (
+                            <tr key={rowId}>
+                                {columns.map(column => (
+                                    <td key={`${rowId}${column}`}>
+                                        {getCell(row, column)}
+                                    </td>
+                                ))}
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
-        </div>
+        </>
     )
 }
 
-const Wrapper = ({ rows }) => {
-    if (rows.length === 0) {
+const Wrapper = (props) => {
+    if (props.rows.length === 0) {
         return null;
     }
 
     return (
-        <Table rows={rows} />
+        <Table {...props} />
     )
 }
 
