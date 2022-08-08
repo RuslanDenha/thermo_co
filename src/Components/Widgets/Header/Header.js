@@ -1,18 +1,29 @@
 import Button from "Components/Widgets/Button/Button";
 
 import css from './header.module.css'
-import {useSelector} from "react-redux";
-import {userSelector} from "../../../Redux/User/UserSlice";
-import {useMemo} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, userSelector } from "../../../Redux/User/UserSlice";
+import {useCallback, useMemo} from "react";
 
 const Header = () => {
     const { username } = useSelector(userSelector);
+    const dispatch = useDispatch();
+
+    const onLogOut = useCallback(() => {
+        localStorage.setItem("access_token", "")
+        dispatch(logout())
+    }, []) //eslint-disable-line
 
     const logInArea = useMemo(() => {
         if (username) {
             return (
-                <div className={css.userName}>
-                    User: {username}
+                <div className={css.navigationLine} >
+                    <Button onClick={onLogOut} >
+                        Log Out
+                    </Button>
+                    <div className={css.userName}>
+                        User: {username}
+                    </div>
                 </div>
             )
         } else {
@@ -23,7 +34,7 @@ const Header = () => {
             )
         }
 
-    }, [username])
+    }, [username]) // eslint-disable-line
 
     return (
         <nav>

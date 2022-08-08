@@ -45,6 +45,14 @@ export const userSlice = createSlice({
         isError: false,
         errorMessage: "",
     },
+    reducers: {
+        logout: state => {
+            state.username = '';
+            state.isSuccess = false;
+            state.isError = false;
+            state.errorMessage = "";
+        }
+    },
     extraReducers: {
         [login.fulfilled]: (state, action) => {
             state.username = action.payload.username;
@@ -60,11 +68,19 @@ export const userSlice = createSlice({
         },
         [getAuthenticatedUser.fulfilled]: (state, action) => {
             state.username = action.payload.username;
+            state.isSuccess = true;
+            state.isError = false;
+            state.errorMessage = '';
         },
-        [getAuthenticatedUser.rejected]: (state) => {
+        [getAuthenticatedUser.rejected]: (state, action) => {
             state.username = null;
+            state.isSuccess = false;
+            state.isError = true;
+            state.errorMessage = action.payload;
         }
     }
 })
 
 export const userSelector = state => state.user
+
+export const { logout } = userSlice.actions
