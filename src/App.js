@@ -9,6 +9,7 @@ import Main from "Components/Pages/Main/Main";
 import SensorsList from "Components/Pages/SensorsList/SensorsList";
 import SensorDetails from "./Components/Pages/SensorDetails/SensorDetails";
 import Header from "Components/Widgets/Header/Header";
+import ProtectedRoute from "Components/Widgets/ProtectedRoute/ProtectedRoute";
 import { getAuthenticatedUser } from "Redux/User/UserSlice";
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/sensors" element={<SensorsList />} />
-                <Route path="/sensors/:id" element={<SensorDetails />} />
+                <Route path="/sensors" element={ProtectedRoute(SensorsList)} />
+                <Route path="/sensors/:id" element={ProtectedRoute(SensorDetails)} />
                 <Route path="/login" element={<LogIn />} />
             </Routes>
         </div>

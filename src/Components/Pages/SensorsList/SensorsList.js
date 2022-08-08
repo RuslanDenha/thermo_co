@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { getRequest, routes } from "api";
 import Table from 'Components/Widgets/Table/Table'
 import ErrorLine from 'Components/Widgets/ErrorLine/ErrorLine';
 import SensorsListNewSensor from "./SensorsListNewSensor";
 import css from './sensorsList.module.css'
-import {useNavigate} from "react-router-dom";
 
 const SensorsList = () => {
     const navigate = useNavigate();
